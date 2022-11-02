@@ -34,7 +34,7 @@ class UserViewSet(ModelViewSet):
     permission_classes = (ActionBasedPermission,)
     action_permissions = {
         IsAdminUser: ["destroy"],
-        IsAuthenticated: ["list", "update", "partial_update", "create"],
+        IsAuthenticated: ["list", "retrieve", "update", "partial_update", "create"],
     }
 
     def perform_create(self, serializer):
