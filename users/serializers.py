@@ -10,7 +10,7 @@ class UserSerializer(ModelSerializer):
     class Meta:
         model = User
         exclude = [
-            "is_superuser",
+            "is_staff",
             "jwt_id",
             "groups",
             "user_permissions",

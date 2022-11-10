@@ -1,7 +1,7 @@
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpRequest, JsonResponse
 from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.authtoken.models import Token
@@ -33,8 +33,9 @@ class UserViewSet(ModelViewSet):
     serializer_class = UserSerializer
     permission_classes = (ActionBasedPermission,)
     action_permissions = {
+        AllowAny: ["create"],
         IsAdminUser: ["destroy"],
-        IsAuthenticated: ["list", "retrieve", "update", "partial_update", "create"],
+        IsAuthenticated: ["list", "retrieve", "update", "partial_update"],
     }
 
     def perform_create(self, serializer):

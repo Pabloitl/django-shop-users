@@ -22,22 +22,24 @@ class User(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(
         max_length=150,
         unique=True,
+        blank=True,
+        null=True,
         validators=[username_validator],
         error_messages={
             "unique": "A user with that username already exists.",
         },
     )
-    email = models.EmailField("email address", blank=True, unique=True)
+    email = models.EmailField("email address", unique=True)
 
-    first_name = models.CharField(max_length=150, blank=True)
-    phone = models.CharField(max_length=10)
+    full_name = models.CharField(max_length=150)
+    phone = models.CharField(max_length=10, blank=True, null=True)
 
-    address_line_1 = models.CharField(max_length=150, blank=True)
-    address_line_2 = models.CharField(max_length=150, blank=True)
-    address_city = models.CharField(max_length=150, blank=True)
-    address_state = models.CharField(max_length=150, blank=True)
-    address_country = models.CharField(max_length=150, blank=True)
-    address_cp = models.IntegerField(blank=True)
+    address_line_1 = models.CharField(max_length=150, blank=True, null=True)
+    address_line_2 = models.CharField(max_length=150, blank=True, null=True)
+    address_city = models.CharField(max_length=150, blank=True, null=True)
+    address_state = models.CharField(max_length=150, blank=True, null=True)
+    address_country = models.CharField(max_length=150, blank=True, null=True)
+    address_cp = models.IntegerField(blank=True, null=True)
 
     jwt_id = models.CharField(
         max_length=64,
