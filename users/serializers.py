@@ -18,6 +18,19 @@ class UserSerializer(ModelSerializer):
         ]
 
 
+class SafeUserSerializer(ModelSerializer):
+    class Meta:
+        model = User
+        exclude = [
+            "is_staff",
+            "jwt_id",
+            "groups",
+            "user_permissions",
+            "last_login",
+            "password",
+        ]
+
+
 class CredentialSerializer(Serializer):
     email = serializers.CharField()
     password = serializers.CharField()
